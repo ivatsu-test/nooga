@@ -2,7 +2,7 @@ import GoogleSignIn from "@/components/buttons/google-sign-in";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../api/auth/[...nextauth]/auth-options";
 
 export default async function Login() {
   const session = await getServerSession(authOptions);

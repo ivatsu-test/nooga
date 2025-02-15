@@ -3,7 +3,7 @@ import CreateUsers from "@/components/buttons/create-users";
 import SignOut from "@/components/buttons/sign-out";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "./api/auth/[...nextauth]/auth-options";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
