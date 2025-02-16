@@ -8,23 +8,31 @@ const createUser = (user: User) => {
 };
 
 export default function CreateUser() {
-  const exampleUser = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    image: "https://example.com/john-doe.jpg",
-    emailVerified: null,
-  };
+  async function onCreateUser() {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/users/1"
+    );
+    const user = await response.json();
 
-  const res = userSchema.safeParse(exampleUser);
+    const exampleUser = {
+      name: user.name,
+      email: user.email,
+      image: `https://example.com/${user.name.split(" ").join("_")}.jpg`,
+      emailVerified: null,
+    };
 
-  if (!res.success) {
-    throw new Error(res.error.errors.join(", "));
+    const res = userSchema.safeParse(exampleUser);
+
+    if (!res.success) {
+      throw new Error(res.error.errors.join(", "));
+    }
+    createUser(res.data);
   }
 
   return (
     <button
       className="p-4 text-center bg-green-100 rounded-md text-green-800"
-      onClick={() => createUser(res.data)}
+      onClick={onCreateUser}
     >
       Create User
     </button>
